@@ -1,0 +1,391 @@
+/**
+ * ALICE colors
+ * 		Dark red	#f3152b
+ *		Blue		#273b45
+ *		Orange		#f97f39
+ *		Light red	#ce4d4f
+ */
+
+body {
+	background: #eee;
+	font-family: "Gill Sans", "Gill Sans MT", sans-serif;
+	color: #273b45;
+	font-size: 14px;
+}
+h1, h2, h3, h4, h5, p {
+	padding: 0px;
+	margin: 0px;
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+p {
+	text-align: justify;
+}
+
+/* Header */
+body > header {
+	width: 100%;
+	min-width: 960px;
+	background: #fff;
+}
+body > header div#logo {
+	padding: 10px;
+	width: 150px;
+	margin: 0px auto;
+}
+body > header div#logo img {
+	width: 150px;
+}
+body > header .no-js-alert {
+	display: none;
+}
+html.no-js body > header .no-js-alert {
+	color: red;
+	background: #eee;
+	padding: 5px;
+	top: 40px;
+	left: 10px;
+	position: absolute;
+	z-index: 10000;
+	opacity: 0.8;
+}
+
+/* Main contaner */
+div#main {
+	width: 100%;
+	min-width: 960px;
+	position: relative;
+}
+div#main div#line {
+	padding: 0px;
+	margin: 0px
+	width: 0px;
+	margin-left: 3px;		
+	border-left: 4px solid #ce4d4f;
+	margin-right: 3px;
+	float: left;		
+	top: 1px;
+	left: 475px;
+	position: absolute;
+	z-index: 1000;
+}
+
+/* Tape */
+div#years_tape {
+	width: 58px;
+	position: fixed;
+	z-index: 10000;	
+	margin-left: 20px;
+	top: 20px;
+}
+@media ( max-width: 1160px ) {
+	div#years_tape { display: none; }
+}
+/*
+	div#years_tape ul#years_list {
+		margin: 0px;
+		padding: 0px;
+		width: 100px;
+	}
+	div#years_tape ul#years_list li {
+		margin: 3px 0px;
+		padding-left: 3px;	
+		padding-right: 3px;	
+		list-style: none;
+		text-align: center;
+		background: #eee;
+		font-size: 15px;
+		cursor: hand;
+		cursor: pointer;
+		width: 58px;
+		float: right;
+	}
+	div#years_tape ul#years_list li.current,
+	div#years_tape ul#years_list li:hover {
+		font-size: 40px;
+		width: 100px;
+	}
+*/
+div#years_tape div.year-container {
+	float: left;
+	clear: both;
+}
+div#years_tape div.year-container div.year-label {
+	display: inline-block;
+	margin: 5px;
+	padding: 8px 10px;
+	background: #585454;
+	border: 1px solid rgba(0,0,0,0.15);
+	border-radius: 1px;
+	transition: all 0.3s ease-out;
+	box-shadow:
+	inset 0 1px 0 rgba(255,255,255,0.5),
+	0 2px 2px rgba(0,0,0,0.3),
+	0 0 4px 1px rgba(0,0,0,0.2);
+	text-decoration: none;
+	text-shadow: 0 1px rgba(255,255,255,0.7);
+	float:left;
+	font-size: 25px;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif; 
+	color:white;
+}
+div#years_tape div.year-container div.year-label.current,
+div#years_tape div.year-container div.year-label:hover {
+	background: #F05A2F;
+	cursor: pointer;
+	cursor: hand;
+}
+div#years_tape div.year-container div.year-description {
+	width: 700px;
+	padding:8px 0px 0px 4px; 
+	height: 15px; 
+	line-height: 20px; 
+	color:  #575858;
+	font-size: 20px; 
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif; 
+	font-weight: 300; 
+	text-transform: uppercase;
+	-webkit-transition: all 0.5s ease; -moz-transition: all 0.5s ease; -o-transition: all 0.5s ease;
+}
+div#years_tape div.year-container > div {
+    display: none
+}
+div#years_tape div.year-container > div:first-child {
+    display: block
+}
+div#years_tape div.year-container div.year-label:hover + div.year-description {
+    display: block
+}
+
+/* Content of years */
+div#years_content {	
+}
+div#years_content div.year {
+	width: 100%;
+	min-width: 960px;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;	
+	background-attachment: fixed;
+	border-top: 1px solid rgba( 255, 255, 255, 0.3 );
+	border-bottom: 1px solid rgba( 0, 0, 0, 0.4 );
+	-webkit-box-shadow: 0 0 50px rgba( 0, 0, 0, 0.8 );
+	-moz-box-shadow: 0 0 50px rgba( 0, 0, 0, 0.8 );
+	-o-box-shadow: 0 0 50px rgba( 0, 0, 0, 0.8 );
+	box-shadow: 0 0 50px; 
+	padding-top: 3px;
+	position: relative;
+	z-index: 100;
+}
+div#years_content div.inner {
+	width: 960px;
+	margin: 0px auto;
+}
+div#years_content div.hidden {
+	display: none;
+}
+div#years_content div.boxes-container {
+	width: 470px;	
+	float: left;
+}
+div#years_content div.boxes-container.left {		
+	margin-left: 5px;
+	padding-right: 5px;
+}
+div#years_content div.boxes-container.right {
+	margin-right: 5px;
+	padding-left: 5px;
+}
+div#years_content div.box {
+	margin-top: 3px;
+	margin-bottom: 3px;
+	background: #eee;
+	padding: 5px;
+	max-width: 460px;
+}
+div#years_content div.box.html {
+	padding: 20px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	background: rgba(84,84,84,0.80)	;
+	color: white;
+	max-width: 450px;
+	 box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.5),
+    0 2px 2px rgba(0,0,0,0.3),
+    0 0 4px 1px rgba(0,0,0,0.2);
+}
+div#years_content div.box.image {
+	position: relative;
+} 
+div#years_content div.box.image img {
+	width: 100%;	
+}
+div#years_content div.box.left {
+	float: right;
+}
+div#years_content div.box.right {
+	float: left;
+}
+div#years_content div.box.year-box {
+	background: #f3152b;
+	padding: 0px;
+	margin: 0px;
+	-webkit-border-radius: 0px;
+	border-radius: 0px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+div#years_content div.box.year-box h2 {
+	padding: 0px;
+	margin: 0px;
+	font-size: 50px;
+	line-height: 50px;
+	color: #f97f39;
+}
+div#years_content div.box.loader-box {
+	height: 50px;
+	width: 50px;
+	padding: 0px;
+	text-align: center; 
+}
+div#years_content div.box.loader-box img {
+	width: 26px;
+	margin-top: 12px;
+}
+div#years_content div.box div.modal-content {
+	display: none;
+	padding:30px;
+}
+div#years_content div.box.html a.read-more,
+div#years_content div.box.html a.read-more:visited,
+div#years_content div.box.html a.read-more:hover,
+div#years_content div.box.html a.read-more:active {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	color: #f97f39;
+	display: block;
+	text-align: right;
+}
+div#years_content div.box.image a.read-more,
+div#years_content div.box.image a.read-more:visited,
+div#years_content div.box.image a.read-more:hover,
+div#years_content div.box.image a.read-more:active {
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+	padding: 0px;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-size: 16px;
+	line-height: 20px;
+	background: #eee;
+	color: #666;
+	text-decoration: none;
+}
+div#years_content div.box.image div.label {
+	position: absolute;
+	bottom: 5px;
+	left: 5px;
+	padding: 0px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top:10px;
+	padding-bottom:5px;
+	font-size: 14px;
+	line-height: 16px;
+	background: #eee;
+	color: #F05A2F;
+	text-decoration: none;
+	opacity: 0.8;
+}
+
+/* Final video */
+footer#video_container {
+	width: 960px;
+	margin: 0px auto;
+}
+footer#video_container video {
+	z-index: 100000;
+	position: relative;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+/* Foregrounds */
+div#years_content div.foregrounds-container div.foreground {
+	position: absolute;	
+	z-index: 5000;
+}
+div#years_content div.foregrounds-container div.foreground img {
+	width: 100%;
+}
+
+/* Model window */
+div#modal_window {
+	border: 1px solid #eee;
+	width: 600px;
+	height: 400px;
+	background: #f3f7f6;
+	position: fixed;
+	z-index: 1000;
+	-webkit-box-shadow:  0px 0px 30px 5px rgba( 0, 0, 0, 0.9 );
+	box-shadow:  0px 0px 30px 5px rgba( 0, 0, 0, 0.9 );
+    display: none;
+}
+div#modal_window header {	
+	height: 25px;
+}
+div#modal_window header div.close {
+	height: 25px;
+	/*width: 25px;*/
+	padding-left: 10px;
+	padding-right: 10px;
+	line-height: 25px;
+	text-align: center;
+	font-size: 20px;
+	color: #F05A2F;
+	float: right;
+	cursor: hand;
+	cursor: pointer;
+}
+div#modal_window header div.close:hover {
+		color: #333;
+}
+div#modal_window div.content {
+	height: 355px;
+	width: auto;
+	padding:10px 30px;
+	overflow-y: auto;
+	font-size: 16px;
+}
+
+/* Global shadow */
+div#global_shadow {
+	width: 100%;
+	min-width: 960px;
+	background: #666;
+	opacity: 0.5;
+	position: fixed;
+	z-index: 100;
+	top: 0px;
+	left: 0px;
+	display: none;
+}
+
+/* Loader */
+div#loader {
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	background: #273b45;
+	position: fixed;
+	z-index: 1000;
+    display: none;
+    padding: 0px;
+    margin: 0px;
+}
+div#loader img {
+	width: 30px;
+	height: 30px;
+	margin-top: 10px;
+}
