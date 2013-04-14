@@ -29,15 +29,16 @@ var Sarpaque = {
 		/* Setup scroll spy */
 		Sarpaque.ScrollSpy.init();
 
+		/* Setup loader */
+		Sarpaque.Loader.init();
+
 		/* Setup modals */
 		Sarpaque.Modal.init();
 		jQuery( "div.box a.show-modal" ).click( 
 			function( e ) 
 			{
 				e.preventDefault();
-				var mc = jQuery( this ).siblings( "div.modal-content" );
-				var c = jQuery( this ).siblings( "div.modal-content" ).html();
-				if( c != undefined && c != "" ) Sarpaque.Modal.show( c );
+				Sarpaque.Modal.showURL( jQuery( this ).attr( "href" ) );
 			} 
 		);		
 
@@ -58,6 +59,9 @@ var Sarpaque = {
 
 		/* Set position of modal window */
 		Sarpaque.Modal.pageResized( windowHeight, windowWidth );
+
+		/* Set position of the loader */
+		Sarpaque.Loader.pageResized( windowHeight, windowWidth );
 
 		/* Set years tape in the middle */
 		Sarpaque.YearsTape.pageResized( windowHeight, windowWidth );		

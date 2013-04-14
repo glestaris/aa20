@@ -59,6 +59,24 @@ Sarpaque.Modal = {
 		this._shown = true;
 	},
 
+	showURL: function( url )
+	{
+		Sarpaque.Modal.show( "<div class=\"loader\">Loading content...</div>" );
+		jQuery.ajax(
+			{
+				"url": url,
+				"success": function( data, textStatus, jqXHR )
+				{
+					jQuery( ".content", Sarpaque.Modal._el ).html( data );
+				},
+				"error": function( jqXHR, textStatus, errorThrown )
+				{
+					jQuery( ".content", Sarpaque.Modal._el ).html( "<div class=\"error\">Failed to fetch data.</div>" );
+				}
+			}
+		);
+	},
+
 	hide: function()
 	{
 		if( this._locked || !this._shown ) return;			

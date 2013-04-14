@@ -2,7 +2,6 @@
 # This file is part of ALICE Anniversary 2013 website
 # Author: George Lestaris (george.lestaris@cern.ch)
 #
-
 from django.db import models
 from aa20 import settings
 from ckeditor.fields import RichTextField

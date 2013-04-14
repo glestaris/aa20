@@ -1,0 +1,76 @@
+{% load staticfiles %}
+{% load url from future %}
+<div id="year_{{ year }}" style="{{ yb.year.additionalCSS }}" class="year">
+    <div class="foregrounds-container">
+        {% for foreground in yb.foregrounds %}
+            <div id="foreground_{{ foreground.id }}" class="foreground hidden" style="{% if foreground.positionLeft %}left:{{ foreground.positionLeft }}px;{% endif %}{% if foreground.positionRight %}right:{{ foreground.positionRight }};{% endif %}{% if foreground.width %}width: {{ foreground.width }}px;{% endif %}{{ foreground.additionalCSS }}" data-start-offset="{{ foreground.startOffset }}" data-end-offset="{{ foreground.endOffset }}"></div>
+        {% endfor %}
+    </div>
+    <div class="inner">
+        <div class="boxes-container left">
+            <div class="box left html year-box">
+                <h2>{{ year }}</h2>
+            </div>                 
+            <div class="clearfix"></div>               
+            {% for box in yb.boxes.left %}
+                {% if box.contentType == "html" %}
+                    <div id="box_{{ box.id }}" class="box left html hidden" style="width:{{ box.width }}px;{{ box.additionalCSS }}">
+                        {{ box.contentHTML|safe }}                                            
+                        {% if box.readMoreLink and box.readMoreType == "link" %}
+                            <a href="{{ box.readMoreLink }}" class="read-more" target="_blank">
+                                Read more
+                            </a>
+                        {% elif box.readMoreHTML and box.readMoreType == "html" %}                                                
+                            <a href="{% url "/BoxMore" boxId=box.id %}" class="show-modal read-more">Read more</a>                            
+                        {% endif %}                                            
+                    </div>
+                {% else %}
+                    <div id="box_{{ box.id }}" class="box left image hidden" style="width:{{ box.width }}px;{{ box.additionalCSS }}">
+                        {% if box.contentImageLabel %}
+                            <div class="label">{{ box.contentImageLabel }}</div>
+                        {% endif %}
+                        {% if box.readMoreLink and box.readMoreType == "link" %}
+                            <a href="{{ box.readMoreLink }}" class="read-more" target="_blank">Read more</a>
+                        {% elif box.readMoreHTML and box.readMoreType == "html" %}
+                            <a href="{% url "/BoxMore" boxId=box.id %}" class="show-modal read-more">Show info</a>
+                        {% endif %}                        
+                    </div>
+                {% endif %}                                    
+            {% endfor %}
+            <div class="clearfix"></div>
+        </div>                        
+        <div class="boxes-container right">
+            <div class="box right html loader-box">
+                <img src="{% static "img/loader.gif" %}" />
+            </div>
+            <div class="clearfix"></div>
+            {% for box in yb.boxes.right %}                                                                
+                {% if box.contentType == "html" %}
+                    <div id="box_{{ box.id }}" class="box right html hidden" style="width:{{ box.width }}px;{{ box.additionalCSS }}">
+                        {{ box.contentHTML|safe }}
+                        {% if box.readMoreLink and box.readMoreType == "link" %}
+                            <a href="{{ box.readMoreLink }}" class="read-more" target="_blank">
+                                Read more
+                            </a>
+                        {% elif box.readMoreHTML and box.readMoreType == "html" %}
+                            <a href="{% url "/BoxMore" boxId=box.id %}" class="show-modal read-more">Read more</a>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    <div id="box_{{ box.id }}" class="box right image hidden" style="width:{{ box.width }}px;{{ box.additionalCSS }}">
+                        {% if box.contentImageLabel %}
+                            <div class="label">{{ box.contentImageLabel }}</div>
+                        {% endif %}
+                        {% if box.readMoreLink and box.readMoreType == "link" %}
+                            <a href="{{ box.readMoreLink }}" class="read-more" target="_blank">Read more</a>                                                
+                        {% elif box.readMoreHTML and box.readMoreType == "html" %}
+                            <a href="{% url "/BoxMore" boxId=box.id %}" class="show-modal read-more">Show info</a>
+                        {% endif %}                                
+                    </div>
+                {% endif %}                                    
+            {% endfor %}   
+            <div class="clearfix"></div>                             
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

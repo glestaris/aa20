@@ -24,9 +24,6 @@ Sarpaque.YearsTape = {
 		}
 		yToLoad.push( SarpaqueConfig.timelineData.years[i] );
 		if( i > 0 ) yToLoad.push( SarpaqueConfig.timelineData.years[i-1] );
-		// if( i > 0 ) {
-		// 	for( var j = i - 1; j >= 0; j-- ) { yToLoad.push( SarpaqueConfig.timelineData.years[j] ); }			
-		// }
 		if( i < SarpaqueConfig.timelineData.years.length - 1 ) yToLoad.push( SarpaqueConfig.timelineData.years[i+1] );
 
 		/* Create request */
@@ -35,6 +32,9 @@ Sarpaque.YearsTape = {
 			"yearsToLoadLength": yToLoad.length,
 			"scrollTo": y
 		};
+
+		/* Activate loader */
+		Sarpaque.Loader.show();
 
 		/* Load the years */
 		for( i = 0; i < yToLoad.length; i++ ) {
@@ -63,6 +63,9 @@ Sarpaque.YearsTape = {
 			/* Scroll */
 			Sarpaque.ScrollSpy.scrollToYear( Sarpaque.YearsTape._pendingRequest.scrollTo );
 			delete Sarpaque.YearsTape._pendingRequest;
+			
+			/* Hide loader */
+			Sarpaque.Loader.hide();
 		}
 	},
 

@@ -1,5 +1,4 @@
 {% load staticfiles %}
-
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -36,84 +35,7 @@
             <div id="line"></div>
         	<div id="years_content">                
                 {% for year, yb in years.iteritems %}
-                    <div id="year_{{ year }}" style="{{ yb.year.additionalCSS }}" class="year">
-                        <div class="foregrounds-container">
-                            {% for foreground in yb.foregrounds %}
-                                <div id="foreground_{{ foreground.id }}" class="foreground hidden" style="{% if foreground.positionLeft %}left:{{ foreground.positionLeft }}px;{% endif %}{% if foreground.positionRight %}right:{{ foreground.positionRight }};{% endif %}{% if foreground.width %}width: {{ foreground.width }}px;{% endif %}{{ foreground.additionalCSS }}" data-start-offset="{{ foreground.startOffset }}" data-end-offset="{{ foreground.endOffset }}"></div>
-                            {% endfor %}
-                        </div>
-                        <div class="inner">
-                            <div class="boxes-container left">
-                                <div class="box left html year-box">
-                                    <h2>{{ year }}</h2>
-                                </div>                 
-                                <div class="clearfix"></div>               
-                                {% for box in yb.boxes.left %}
-                                    {% if box.contentType == "html" %}
-                                        <div id="box_{{ box.id }}" class="box left html hidden" style="width:{{ box.width }}px;{{ box.additionalCSS }}">
-                                            {{ box.contentHTML|safe }}                                            
-                                            {% if box.readMoreLink and box.readMoreType == "link" %}
-                                                <a href="{{ box.readMoreLink }}" class="read-more" target="_blank">
-                                                    Read more
-                                                </a>
-                                            {% elif box.readMoreHTML and box.readMoreType == "html" %}                                                
-                                                <a href="#" class="show-modal read-more">Read more</a>
-                                                <div class="modal-content">{{ box.readMoreHTML|safe }}</div>
-                                            {% endif %}                                            
-                                        </div>
-                                    {% else %}
-                                        <div id="box_{{ box.id }}" class="box left image hidden" style="width:{{ box.width }}px;{{ box.additionalCSS }}">
-                                            {% if box.contentImageLabel %}
-                                                <div class="label">{{ box.contentImageLabel }}</div>
-                                            {% endif %}
-                                            {% if box.readMoreLink and box.readMoreType == "link" %}
-                                                <a href="{{ box.readMoreLink }}" class="read-more" target="_blank">Read more</a>
-                                            {% elif box.readMoreHTML and box.readMoreType == "html" %}
-                                                <a href="#" class="show-modal read-more">Show info</a>
-                                                <div class="modal-content">{{ box.readMoreHTML|safe }}</div>
-                                            {% endif %}                        
-                                        </div>
-                                    {% endif %}                                    
-                                {% endfor %}
-                                <div class="clearfix"></div>
-                            </div>                        
-                            <div class="boxes-container right">
-                                <div class="box right html loader-box">
-                                    <img src="{% static "img/loader.gif" %}" />
-                                </div>
-                                <div class="clearfix"></div>
-                                {% for box in yb.boxes.right %}                                                                
-                                    {% if box.contentType == "html" %}
-                                        <div id="box_{{ box.id }}" class="box right html hidden" style="width:{{ box.width }}px;{{ box.additionalCSS }}">
-                                            {{ box.contentHTML|safe }}
-                                            {% if box.readMoreLink and box.readMoreType == "link" %}
-                                                <a href="{{ box.readMoreLink }}" class="read-more" target="_blank">
-                                                    Read more
-                                                </a>
-                                            {% elif box.readMoreHTML and box.readMoreType == "html" %}
-                                                <a href="#" class="show-modal read-more">Read more</a>
-                                                <div class="modal-content">{{ box.readMoreHTML|safe }}</div>
-                                            {% endif %}
-                                        </div>
-                                    {% else %}
-                                        <div id="box_{{ box.id }}" class="box right image hidden" style="width:{{ box.width }}px;{{ box.additionalCSS }}">
-                                            {% if box.contentImageLabel %}
-                                                <div class="label">{{ box.contentImageLabel }}</div>
-                                            {% endif %}
-                                            {% if box.readMoreLink and box.readMoreType == "link" %}
-                                                <a href="{{ box.readMoreLink }}" class="read-more" target="_blank">Read more</a>                                                
-                                            {% elif box.readMoreHTML and box.readMoreType == "html" %}
-                                                <a href="#" class="show-modal read-more">Show info</a>
-                                                <div class="modal-content">{{ box.readMoreHTML|safe }}</div>
-                                            {% endif %}                                
-                                        </div>
-                                    {% endif %}                                    
-                                {% endfor %}   
-                                <div class="clearfix"></div>                             
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
+                    {% include "year.html" %}
                 {% endfor %}                
         	</div>
         	<div id="years_tape">
@@ -124,14 +46,14 @@
                         </div>
                         <div class="year-descritpion"></div>
                     </div>
-                {% endfor %}
-                <!-- <ul id="years_list">
-                    {% for year, yb in years.iteritems %}
-                        <li id="y_{{ year }}" data-for-year="{{ year }}">{{ year }}</li>
-                    {% endfor %}
-                </ul> -->
+                {% endfor %}                
             </div>
-        </div>        
+            <footer id="video_container">
+                <video class="video-js vjs-default-skin" controls preload="auto">
+                    <source src="{{ MEDIA_URL }}/final_video.ogv" type="video/ogg">
+                </video>
+            </footer>
+        </div>                
         <div id="global_shadow"></div>
         <div id="modal_window">
             <header>
@@ -159,7 +81,7 @@
         <script type="text/javascript">
             var SarpaqueConfig = {
                 "loadBackgrounds": true,
-                "loadForegrounds": true,
+                "loadForegrounds": false,
                 "timelineData": {
                     "years": [ {% for year, yb in years.iteritems %}"{{ year }}"{% if not forloop.last %},{% endif %}{% endfor %} ],
                     "media": { {% for year, yb in years.iteritems %} "{{ year }}": {{ yb.imagesJSON|safe }}{% if not forloop.last %},{% endif %} {% endfor %} }                    

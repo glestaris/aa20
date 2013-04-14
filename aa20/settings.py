@@ -23,7 +23,8 @@ ROOT_PATH = "/home/george/dev/sarpaque/aa20"
 # system time zone.
 TIME_ZONE = "Europe/Paris"
 
-CDN_HOST = "http://dmsopw99fk3j6.cloudfront.net"
+# CDN_HOST = "http://dmsopw99fk3j6.cloudfront.net"
+CDN_HOST = ""
 
 ####################################################################################################
 # DO NOT TOUCH FOLLOWING LINES
