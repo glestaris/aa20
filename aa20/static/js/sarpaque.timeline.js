@@ -38,6 +38,8 @@ Sarpaque.TimeLine = {
 	 * 		}
 	*/
 	_pendingRequests: {},
+	
+	/*** Public methods ***/
 
 	loadYear: function( year, callBack ) {
 		/* Is year shown? */
@@ -70,9 +72,34 @@ Sarpaque.TimeLine = {
 			}
 		}
 
-		if( Sarpaque.inDebug ) console.log( "Started loading year: " + year );
 		return true;				
+	},
+	
+	/*** Private event handlers ***/
+	
+	imgLoadedCallback: function( url, year )
+	{
+		if( this._pendingRequests[year].pendingMedia[url] == undefined ) return;
+
+		this._pendingRequests[year].loadedMedia[url] = this._pendingRequests[year].pendingMedia[url];
+		delete this._pendingRequests[year].pendingMedia[url];
+
+		/* Are images pending? */
+		if( this._yearIsDone( year ) ) this._showYear( year );
+	},
+
+	imgFailedCallback: function( url, year )
+	{
+		if( this._pendingRequests[year].pendingMedia[url] == undefined ) return;
+
+		this._pendingRequests[year].failedMedia[url] = this._pendingRequests[year].pendingMedia[url];
+		delete this._pendingRequests[year].pendingMedia[url];
+		
+		/* Are images pending? */
+		if( this._yearIsDone( year ) ) this._showYear( year );
 	},	
+	
+	/*** Private methods ***/
 
 	_showYear: function( year ) {
 		if( this.loadedYears[year] != undefined ) return false;
@@ -103,32 +130,24 @@ Sarpaque.TimeLine = {
 		delete this._pendingRequests[year];
 
 		/* Update loaded years */
-		this._updateLoadedYears();
+		Sarpaque.yearLoaded( year );
 
 		/* Update page */
 		Sarpaque.pageResized();
 
 		/* Call callback */
-		if( Sarpaque.inDebug ) console.log( "Year " + year + " loaded!" );
 		if( cb != undefined ) cb( year );
 
 		return true;
 	},
-
-	_updateLoadedYears: function()
-	{
-		for( y in this.loadedYears ) {
-			this.loadedYears[y].top = jQuery( "#year_" + y ).offset().top;
-		}
-	},
-
+	
 	_createMediaObject: function( url, year, type )
 	{
 		if( type != "image" ) return undefined;
 		var ob = new Image();	        
         var that = this;
-        ob.onload = function() { that._imgLoadedCallback( url, year ) }
-        ob.onerror = function() { that._imgFailedCallback( url, year ) }
+        ob.onload = function() { that.imgLoadedCallback( url, year ) }
+        ob.onerror = function() { that.imgFailedCallback( url, year ) }
         ob.src = url;
         return ob;
 	},
@@ -140,27 +159,5 @@ Sarpaque.TimeLine = {
 			return false;
 		}
 		return true;
-	},
-
-	_imgLoadedCallback: function( url, year )
-	{
-		if( this._pendingRequests[year].pendingMedia[url] == undefined ) return;
-
-		this._pendingRequests[year].loadedMedia[url] = this._pendingRequests[year].pendingMedia[url];
-		delete this._pendingRequests[year].pendingMedia[url];
-
-		/* Are images pending? */
-		if( this._yearIsDone( year ) ) this._showYear( year );
-	},
-
-	_imgFailedCallback: function( url, year )
-	{
-		if( this._pendingRequests[year].pendingMedia[url] == undefined ) return;
-
-		this._pendingRequests[year].failedMedia[url] = this._pendingRequests[year].pendingMedia[url];
-		delete this._pendingRequests[year].pendingMedia[url];
-		
-		/* Are images pending? */
-		if( this._yearIsDone( year ) ) this._showYear( year );
-	}	
+	}
 }

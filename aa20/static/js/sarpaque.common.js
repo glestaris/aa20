@@ -7,6 +7,26 @@ Sarpaque.Loader = {
 	/* Flags */
 	_shown: false,
 	_locked: false,
+	
+	/*** Initializer ***/
+
+	init: function()
+	{
+		this._el = jQuery( "#loader" );
+		this._shadowEl = jQuery( "#global_shadow" );
+	},
+	
+	/*** Sarpaque events ***/
+	
+	pageResized: function( windowHeight, windowWidth )
+	{
+		var loaderWidth = jQuery( this._el ).outerWidth();
+		var loaderHeight = jQuery( this._el ).outerHeight();
+		jQuery( this._el ).css( "left", ( windowWidth - loaderWidth ) / 2 );
+		jQuery( this._el ).css( "top", ( windowHeight - loaderHeight ) / 2 );
+	},
+	
+	/*** Public methods ***/	
 
 	show: function()
 	{
@@ -26,27 +46,42 @@ Sarpaque.Loader = {
 		jQuery( this._shadowEl ).hide();
 		this._locked = false;
 		this._shown = false;
-	},
-
-	pageResized: function( windowHeight, windowWidth )
-	{
-		var loaderWidth = jQuery( this._el ).outerWidth();
-		var loaderHeight = jQuery( this._el ).outerHeight();
-		jQuery( this._el ).css( "left", ( windowWidth - loaderWidth ) / 2 );
-		jQuery( this._el ).css( "top", ( windowHeight - loaderHeight ) / 2 );
-	},
-
-	init: function()
-	{
-		this._el = jQuery( "#loader" );
-		this._shadowEl = jQuery( "#global_shadow" );
-	}
+	}	
 };
 
 Sarpaque.Modal = {
 	/* Flags */
 	_shown: false,
 	_locked: false,
+	
+	/*** Initializer ***/
+	
+	init: function()
+	{
+		this._el = jQuery( "#modal_window" );
+		this._shadowEl = jQuery( "#global_shadow" );
+		/* Close modal event */
+		jQuery( "div.close", this._el ).click( function() { Sarpaque.Modal.hide(); } );
+		jQuery( this._shadowEl ).click( function() { Sarpaque.Modal.hide(); } );
+		jQuery( window ).keyup( function( e ) { if( e.keyCode == 27 ) Sarpaque.Modal.hide(); } ); // esc key		
+	},
+	
+	/*** Sarpaque events ***/
+
+	pageResized: function( windowHeight, windowWidth )
+	{
+		/* Set position of modal window */
+		var modalWidth = jQuery( this._el ).outerWidth();
+		var modalHeight = jQuery( this._el ).outerHeight();
+		jQuery( this._el ).css( "left", ( windowWidth - modalWidth ) / 2 );
+		jQuery( this._el ).css( "top", ( windowHeight - modalHeight ) / 2 );
+
+		/* Set the dimensions of the global shadow */
+		jQuery( this._shadowEl ).width( windowWidth );
+		jQuery( this._shadowEl ).height( windowHeight );
+	},
+	
+	/*** Public methods ***/
 
 	show: function( content )
 	{
@@ -81,30 +116,10 @@ Sarpaque.Modal = {
 	{
 		if( this._locked || !this._shown ) return;			
 		this._locked = true;
+		jQuery( "div.content", this._el ).html( "" );
 		jQuery( this._el ).hide();
 		jQuery( this._shadowEl ).hide();
 		this._locked = false;
 		this._shown = false;
-	},
-
-	pageResized: function( windowHeight, windowWidth )
-	{
-		/* Set position of modal window */
-		var modalWidth = jQuery( this._el ).outerWidth();
-		var modalHeight = jQuery( this._el ).outerHeight();
-		jQuery( this._el ).css( "left", ( windowWidth - modalWidth ) / 2 );
-		jQuery( this._el ).css( "top", ( windowHeight - modalHeight ) / 2 );
-
-		/* Set the dimensions of the global shadow */
-		jQuery( this._shadowEl ).width( windowWidth );
-		jQuery( this._shadowEl ).height( windowHeight );
-	},
-
-	init: function()
-	{
-		this._el = jQuery( "#modal_window" );
-		this._shadowEl = jQuery( "#global_shadow" );
-		/* Close modal event */
-		jQuery( "div.close", this._el ).click( function() { Sarpaque.Modal.hide(); } );			
 	}
 };

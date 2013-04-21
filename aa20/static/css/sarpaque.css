@@ -36,32 +36,51 @@ a, a:hover, a:active, a:visited {
 	color: #f97f39;
 }
 
+/* No JavaScript Alert */
+.no-js-alert {
+	color: red;
+	padding: 5px;
+	text-align: center;	
+	display: none;
+}
+html.no-js .no-js-alert {
+	display: block;
+}
+html.no-js #years_tape {
+	display: none;
+}
+
 /* Header */
 body > header {
 	width: 100%;
 	min-width: 960px;
 	background: #fff;
 }
-body > header div#logo {
+body > header div#banner {
+	width: 960px;
+	margin: 0px auto;
+	position: relative;
+}
+body > header div#banner div#links_container {
+	position: absolute;
+	top: 5px;
+	left: 0px;
+}
+body > header div#banner div#links_container a {
+	margin: 3px 0px;
+	padding: 0px 3px;
+	clear: both;
+	background: #eee;
+	text-decoration: none;
+	font-size: 120%;
+}
+body > header div#banner div#logo {
 	padding: 10px;
 	width: 150px;
 	margin: 0px auto;
 }
-body > header div#logo img {
+body > header div#banner div#logo img {
 	width: 150px;
-}
-body > header .no-js-alert {
-	display: none;
-}
-html.no-js body > header .no-js-alert {
-	color: red;
-	background: #eee;
-	padding: 5px;
-	top: 40px;
-	left: 10px;
-	position: absolute;
-	z-index: 10000;
-	opacity: 0.8;
 }
 
 /* Main contaner */
@@ -95,80 +114,32 @@ div#years_tape {
 @media ( max-width: 1160px ) {
 	div#years_tape { display: none; }
 }
-/*
-	div#years_tape ul#years_list {
-		margin: 0px;
-		padding: 0px;
-		width: 100px;
-	}
-	div#years_tape ul#years_list li {
-		margin: 3px 0px;
-		padding-left: 3px;	
-		padding-right: 3px;	
-		list-style: none;
-		text-align: center;
-		background: #eee;
-		font-size: 15px;
-		cursor: hand;
-		cursor: pointer;
-		width: 58px;
-		float: right;
-	}
-	div#years_tape ul#years_list li.current,
-	div#years_tape ul#years_list li:hover {
-		font-size: 40px;
-		width: 100px;
-	}
-*/
-div#years_tape div.year-container {
-	float: left;
-	clear: both;
+div#years_tape {
+	margin: 0px;
+	padding: 0px;
+	width: 100px;
 }
-div#years_tape div.year-container div.year-label {
-	display: inline-block;
-	margin: 5px;
-	padding: 8px 10px;
-	background: #585454;
-	border: 1px solid rgba(0,0,0,0.15);
-	border-radius: 1px;
-	transition: all 0.3s ease-out;
-	box-shadow:
-	inset 0 1px 0 rgba(255,255,255,0.5),
-	0 2px 2px rgba(0,0,0,0.3),
-	0 0 4px 1px rgba(0,0,0,0.2);
-	text-decoration: none;
-	text-shadow: 0 1px rgba(255,255,255,0.7);
-	float:left;
-	font-size: 25px;
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif; 
-	color:white;
-}
-div#years_tape div.year-container div.year-label.current,
-div#years_tape div.year-container div.year-label:hover {
-	background: #F05A2F;
-	cursor: pointer;
+div#years_tape div.year-label {
+	margin: 3px 0px;
+	padding-left: 3px;	
+	padding-right: 3px;	
+	list-style: none;
+	text-align: center;
+	background: #eee;
+	font-size: 15px;
 	cursor: hand;
+	cursor: pointer;
+	width: 58px;
+	float: right;
+	-moz-transition: width 0.5s, font-size 0.5s;
+	-o-transition: width 0.5s, font-size 0.5s;
+	-webkit-transition: width 0.5s, font-size 0.5s;
+	transition: width 0.5s, font-size 0.5s;
 }
-div#years_tape div.year-container div.year-description {
-	width: 700px;
-	padding:8px 0px 0px 4px; 
-	height: 15px; 
-	line-height: 20px; 
-	color:  #575858;
-	font-size: 20px; 
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif; 
-	font-weight: 300; 
-	text-transform: uppercase;
-	-webkit-transition: all 0.5s ease; -moz-transition: all 0.5s ease; -o-transition: all 0.5s ease;
-}
-div#years_tape div.year-container > div {
-    display: none
-}
-div#years_tape div.year-container > div:first-child {
-    display: block
-}
-div#years_tape div.year-container div.year-label:hover + div.year-description {
-    display: block
+div#years_tape div.year-label.current,
+div#years_tape div.year-label:hover {
+	font-size: 40px;
+	width: 100px;
 }
 
 /* Content of years */
@@ -272,6 +243,9 @@ div#years_content div.box.loader-box img {
 	width: 26px;
 	margin-top: 12px;
 }
+div#years_content div.box.html p:first-child {
+	color: #f97f39;
+}
 div#years_content div.box.html a.read-more,
 div#years_content div.box.html a.read-more:visited,
 div#years_content div.box.html a.read-more:hover,
@@ -340,8 +314,8 @@ div#years_content div.foregrounds-container div.foreground img {
 /* Model window */
 div#modal_window {
 	border: 1px solid #eee;
-	width: 600px;
-	height: 400px;
+	width: 800px;
+	height: 600px;
 	background: #f3f7f6;
 	position: fixed;
 	z-index: 1000;
@@ -354,7 +328,6 @@ div#modal_window header {
 }
 div#modal_window header div.close {
 	height: 25px;
-	/*width: 25px;*/
 	padding-left: 10px;
 	padding-right: 10px;
 	line-height: 25px;
@@ -366,10 +339,10 @@ div#modal_window header div.close {
 	cursor: pointer;
 }
 div#modal_window header div.close:hover {
-		color: #333;
+	color: #333;
 }
 div#modal_window div.content {
-	height: 355px;
+	height: 555px;
 	width: auto;
 	padding: 0px 30px 10px 30px;
 	overflow-y: auto;
@@ -385,6 +358,11 @@ div#modal_window div.content div.loader {
 	color: #f97f39;
 	text-align: center;
 	padding-top: 80px;
+}
+/* Youtube viedos */
+div#modal_window div.content iframe {
+	margin: 0px auto;
+	display: block;
 }
 
 /* Global shadow */

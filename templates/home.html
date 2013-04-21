@@ -19,26 +19,32 @@
     </head>
     <body>        
         <header>
-            <!--[if lt IE 7]>
-                <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-            <![endif]-->
-            <h2 class="no-js-alert">
-                You should enable JavaScript to view this page!
-            </h2>
-            <div id="logo">
-                <a href="http://alice.web.cern.ch/" target="_blank">
-                    <img src="{% static "img/alice_logo.jpg" %}" alt="ALICE" />
-                </a>
-            </div> 
+            <div id="banner">
+	            <!--[if lt IE 7]>
+	                <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+	            <![endif]-->
+	            <h2 class="no-js-alert">
+	                You should enable JavaScript to view this page!
+	            </h2>	
+				<div id="links_container">
+					<a href="{% static "pages/collaboration.html" %}" class="show-modal">Collaboration</a>
+					<a href="{% static "pages/credits.html" %}" class="show-modal">Credits</a>
+				</div>
+				<div id="logo">
+				    <a href="http://alice.web.cern.ch/" target="_blank">
+				        <img src="{% static "img/alice_logo.jpg" %}" alt="ALICE" />
+				    </a>
+				</div> 
+            </div>
         </header>        
         <div id="main">      
             <div id="line"></div>
-        	<div id="years_content">                
+            <div id="years_content">                
                 {% for year, yb in years.iteritems %}
                     {% include "year.html" %}
                 {% endfor %}                
-        	</div>
-        	<div id="years_tape">
+            </div>
+            <div id="years_tape">
                 {% for year, yb in years.iteritems %}
                     <div class="year-container">
                         <div class="year-label" id="y_{{ year }}" data-for-year="{{ year }}">
@@ -75,13 +81,13 @@
         <script src="{% static "js/sarpaque.js" %}"></script>
         <script src="{% static "js/sarpaque.common.js" %}"></script>
         <script src="{% static "js/sarpaque.timeline.js" %}"></script>        
-        <script src="{% static "js/sarpaque.scroll_spy.js" %}"></script>    
         <script src="{% static "js/sarpaque.years_tape.js" %}"></script>
+		<script src="{% static "js/sarpaque.foregrounds.js" %}"></script>
         <!-- Config of the content -->
         <script type="text/javascript">
             var SarpaqueConfig = {
                 "loadBackgrounds": true,
-                "loadForegrounds": false,
+                "loadForegrounds": true,
                 "timelineData": {
                     "years": [ {% for year, yb in years.iteritems %}"{{ year }}"{% if not forloop.last %},{% endif %}{% endfor %} ],
                     "media": { {% for year, yb in years.iteritems %} "{{ year }}": {{ yb.imagesJSON|safe }}{% if not forloop.last %},{% endif %} {% endfor %} }                    

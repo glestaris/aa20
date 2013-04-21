@@ -4,8 +4,7 @@
  */
 
 var Sarpaque = {
-	/* In debug flag */
-	inDebug: true,
+	/*** Initializer ***/
 
 	init: function()
 	{		
@@ -15,39 +14,41 @@ var Sarpaque = {
 			SarpaqueConfig["loadBackgrounds"] = ( qd["load_backgrounds"] == "true" );
 		if( qd["load_foregrounds"] != undefined )
 			SarpaqueConfig["loadForegrounds"] = ( qd["load_foregrounds"] == "true" );
-
-		/* Setup resize events */
+		
+		/* Sarpaque modules */
+		Sarpaque.Loader.init();
+		Sarpaque.Modal.init();
+		Sarpaque.YearsTape.init();
+		Sarpaque.Foregrounds.init();
+		
+		/* Setup resize event */
 		jQuery( window ).resize( Sarpaque.pageResized );
 		jQuery( "body" ).resize( Sarpaque.pageResized );
-		Sarpaque.pageResized();
-
-		/* Load first 3 years */
-		for( var i = 0; i < 3; i++ ) {
-			Sarpaque.TimeLine.loadYear( SarpaqueConfig.timelineData.years[i] );	
-		}		
+		Sarpaque.pageResized();		
+		/* Setup scroll event */
+		jQuery( window ).scroll( Sarpaque.scroll );
+		Sarpaque.scroll();
 		
-		/* Setup scroll spy */
-		Sarpaque.ScrollSpy.init();
-
-		/* Setup loader */
-		Sarpaque.Loader.init();
-
-		/* Setup modals */
-		Sarpaque.Modal.init();
-		jQuery( "div.box a.show-modal" ).click( 
+		/* Setup modal handler */
+		jQuery( "a.show-modal" ).click( 
 			function( e ) 
 			{
 				e.preventDefault();
 				Sarpaque.Modal.showURL( jQuery( this ).attr( "href" ) );
 			} 
-		);		
-
-		/* Setup years tape */
-		Sarpaque.YearsTape.init();
+		);
+		
+		/* Load first 3 years */
+		for( var i = 0; i < 3; i++ ) {
+			Sarpaque.TimeLine.loadYear( SarpaqueConfig.timelineData.years[i] );	
+		}		
 	},
+	
+	/*** Sarpaque events ***/
 
 	pageResized: function()
 	{
+		/* Get params */
 		var windowWidth = jQuery( window ).width();
 		var windowHeight = jQuery( window ).height();
 
@@ -57,15 +58,31 @@ var Sarpaque = {
 		var lineWidth = jQuery( "div#line" ).outerWidth( true );
 		jQuery( "div#line" ).css( "left", ( windowWidth - lineWidth ) / 2 );
 
-		/* Set position of modal window */
+		/* Sarpaque modules */
 		Sarpaque.Modal.pageResized( windowHeight, windowWidth );
-
-		/* Set position of the loader */
 		Sarpaque.Loader.pageResized( windowHeight, windowWidth );
-
-		/* Set years tape in the middle */
 		Sarpaque.YearsTape.pageResized( windowHeight, windowWidth );		
+		Sarpaque.Foregrounds.pageResized( windowHeight, windowWidth );		
 	},
+	
+	scroll: function()
+	{
+		/* Get params */
+		var scrollTop = jQuery( window ).scrollTop();
+
+		/* Sarpaque modules */		
+		Sarpaque.YearsTape.scroll( scrollTop );
+		Sarpaque.Foregrounds.scroll( scrollTop );
+	},
+	
+	yearLoaded: function( year )
+	{
+		/* Sarpaque modules */
+		Sarpaque.YearsTape.yearLoaded( year );
+		Sarpaque.Foregrounds.yearLoaded( year );		
+	},
+	
+	/*** Private event handlers ***/	
 
 	_getQueryDict: function()
 	{
