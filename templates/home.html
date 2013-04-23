@@ -47,10 +47,9 @@
             <div id="years_tape">
                 {% for year, yb in years.iteritems %}
                     <div class="year-container">
-                        <div class="year-label {{ yb.decade.class }}" id="y_{{ year }}" data-for-year="{{ year }}">
+                        <div class="year-label {{ yb.period.class }}" id="y_{{ year }}" data-for-year="{{ year }}">
                             {{ year }}
                         </div>
-                        <div class="year-descritpion"></div>
                     </div>
                 {% endfor %}                
             </div>

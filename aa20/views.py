@@ -10,34 +10,37 @@ from aa20.models import Box, Year, Foreground
 # debug
 import pprint
 
-# Decades (not nice!)
-DECADES = [
+# PERIODS (not nice!)
+PERIODS = [
 	{
-		"class": "dec-a",
+		"class": "period-a",
 		"label": "Setting the Stage",
 		"years": range(1993, 1996)
 	},
 	{
-		"class": "dec-b",
+		"class": "period-b",
 		"label": "Designing a Heavy-Ion Experiment",
 		"years": range(1996, 1999)
 	},
 	{
-		"class": "dec-c",
+		"class": "period-c",
 		"label": "Building ALICE",
 		"years": range(1999, 2009)
 	},
 	{
-		"class": "dec-d",
+		"class": "period-d",
 		"label": "First Results",
 		"years": range(2009, 2014)
 	}
 ]
 
+# Maximun box width (not nice as well...)
+MAX_BOX_WIDTH = 420
+
 def home( request ):
 	context = {}
 	
-	decId = 0
+	perId = -1
 
 	# Get data
 	years = Year.objects.all()
@@ -48,7 +51,13 @@ def home( request ):
 
 		# Get data
 		leftBoxes = Box.objects.filter( year = y, direction = Box.DIR_LEFT ).order_by( "order" )
+		for box in leftBoxes:
+			if box.width > MAX_BOX_WIDTH:
+				box.width = MAX_BOX_WIDTH
 		rightBoxes = Box.objects.filter( year = y, direction = Box.DIR_RIGHT ).order_by( "order" )
+		for box in rightBoxes:
+			if box.width > MAX_BOX_WIDTH:
+				box.width = MAX_BOX_WIDTH		
 		foregrounds = Foreground.objects.filter( year = y )
 		
 		# Get all required images
@@ -70,13 +79,18 @@ def home( request ):
 			if fg.image:
 				images["foregrounds"][fg.id] = fg.image.url
 				
-		# Find the decade
-		while int(y.year) not in DECADES[decId]["years"]:
-			decId += 1
-		if decId < len(DECADES):
-			dec = DECADES[decId]
+		# Find the perade
+		perChanged = False
+		if perId == -1:
+			perChanged = True
+			perId = 0			
+		while int(y.year) not in PERIODS[perId]["years"]:
+			perId += 1
+			perChanged = True
+		if perId < len(PERIODS):
+			per = PERIODS[perId]
 		else:
-			dec = None
+			per = None
 
 		# Set context entry
 		context["years"][y.year] = {
@@ -87,7 +101,8 @@ def home( request ):
 			},
 			"foregrounds": foregrounds,
 			"images": images,
-			"decade": dec,
+			"period": per,
+			"periodChanged": perChanged,
 			"imagesJSON": json.dumps( images )
 		}
 		

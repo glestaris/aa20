@@ -8,9 +8,14 @@
     </div>
     <div class="inner">
         <div class="boxes-container left">
-            <div class="box left html year-box">
+            <div class="box left html year-label {{ yb.period.class }}">
                 <h2>{{ year }}</h2>
-            </div>                 
+            </div>
+			{% if yb.periodChanged %}
+				<div class="box left html period-title year-label {{ yb.period.class }}">
+					<h1>{{ yb.period.label }}</h1>
+				</div>
+			{% endif %}
             <div class="clearfix"></div>               
             {% for box in yb.boxes.left %}
                 {% if box.contentType == "html" %}

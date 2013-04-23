@@ -141,19 +141,6 @@ div#years_tape div.year-label:hover {
 	font-size: 40px;
 	width: 100px;
 }
-div#years_tape div.year-label.dec-a {
-	background-color: #f3152b;
-}
-div#years_tape div.year-label.dec-b {
-	background-color: #273b45;
-	color: #fff;
-}
-div#years_tape div.year-label.dec-c {
-	background-color: #f97f39;
-}
-div#years_tape div.year-label.dec-d {
-	background-color: #ce4d4f;
-}
 	
 /* Content of years */
 div#years_content {	
@@ -212,10 +199,10 @@ div#years_content div.box.html {
 	background: rgba(84,84,84,0.80)	;
 	color: white;
 	max-width: 450px;
-	 box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.5),
-    0 2px 2px rgba(0,0,0,0.3),
-    0 0 4px 1px rgba(0,0,0,0.2);
+	box-shadow:
+		inset 0 1px 0 rgba(255,255,255,0.5),
+		0 2px 2px rgba(0,0,0,0.3),
+		0 0 4px 1px rgba(0,0,0,0.2);
 }
 div#years_content div.box.image {
 	position: relative;
@@ -228,22 +215,6 @@ div#years_content div.box.left {
 }
 div#years_content div.box.right {
 	float: left;
-}
-div#years_content div.box.year-box {
-	background: #f3152b;
-	padding: 0px;
-	margin: 0px;
-	-webkit-border-radius: 0px;
-	border-radius: 0px;
-	margin-top: 3px;
-	margin-bottom: 3px;
-}
-div#years_content div.box.year-box h2 {
-	padding: 0px;
-	margin: 0px;
-	font-size: 50px;
-	line-height: 50px;
-	color: #f97f39;
 }
 div#years_content div.box.loader-box {
 	height: 50px;
@@ -300,6 +271,53 @@ div#years_content div.box.image div.label {
 	color: #F05A2F;
 	text-decoration: none;
 	opacity: 0.8;
+}
+div#years_content div.box.year-label {
+	background: #f3152b;
+	padding: 0px;
+	margin: 0px;
+	-webkit-border-radius: 0px;
+	border-radius: 0px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	color: #273b45;
+}
+div#years_content div.box.year-label h2 {
+	padding: 0px;
+	margin: 0px;
+	font-size: 50px;
+	line-height: 50px;
+}
+div#years_content div.box.period-title {
+	padding: 0px 10px;
+	border: none;
+	margin-right: 5px;	
+}
+div#years_content div.box.period-title h1 {
+	font-weight: normal;
+	font-size: 150%;
+}
+
+/* Year labels periods */
+div#years_tape div.year-label.period-a,
+div#years_content div.box.year-label.period-a {
+	background-color: #f3152b;
+	color: #fff;
+}
+div#years_tape div.year-label.period-b,
+div#years_content div.box.year-label.period-b {
+	background-color: #273b45;
+	color: #fff;
+}
+div#years_tape div.year-label.period-c,
+div#years_content div.box.year-label.period-c {
+	background-color: #f97f39;
+	color: #fff;
+}
+div#years_tape div.year-label.period-d,
+div#years_content div.box.year-label.period-d {
+	background-color: #ce4d4f;
+	color: #fff;	
 }
 
 /* Final video */
