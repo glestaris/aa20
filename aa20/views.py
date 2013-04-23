@@ -10,8 +10,34 @@ from aa20.models import Box, Year, Foreground
 # debug
 import pprint
 
+# Decades (not nice!)
+DECADES = [
+	{
+		"class": "dec-a",
+		"label": "Setting the Stage",
+		"years": range(1993, 1996)
+	},
+	{
+		"class": "dec-b",
+		"label": "Designing a Heavy-Ion Experiment",
+		"years": range(1996, 1999)
+	},
+	{
+		"class": "dec-c",
+		"label": "Building ALICE",
+		"years": range(1999, 2009)
+	},
+	{
+		"class": "dec-d",
+		"label": "First Results",
+		"years": range(2009, 2014)
+	}
+]
+
 def home( request ):
 	context = {}
+	
+	decId = 0
 
 	# Get data
 	years = Year.objects.all()
@@ -43,6 +69,14 @@ def home( request ):
 		for fg in foregrounds:
 			if fg.image:
 				images["foregrounds"][fg.id] = fg.image.url
+				
+		# Find the decade
+		while int(y.year) not in DECADES[decId]["years"]:
+			decId += 1
+		if decId < len(DECADES):
+			dec = DECADES[decId]
+		else:
+			dec = None
 
 		# Set context entry
 		context["years"][y.year] = {
@@ -53,9 +87,10 @@ def home( request ):
 			},
 			"foregrounds": foregrounds,
 			"images": images,
+			"decade": dec,
 			"imagesJSON": json.dumps( images )
 		}
-
+		
 	return render( request, "home.html", context )
 
 def get_year( request, year ):

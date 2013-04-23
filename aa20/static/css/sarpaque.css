@@ -141,7 +141,20 @@ div#years_tape div.year-label:hover {
 	font-size: 40px;
 	width: 100px;
 }
-
+div#years_tape div.year-label.dec-a {
+	background-color: #f3152b;
+}
+div#years_tape div.year-label.dec-b {
+	background-color: #273b45;
+	color: #fff;
+}
+div#years_tape div.year-label.dec-c {
+	background-color: #f97f39;
+}
+div#years_tape div.year-label.dec-d {
+	background-color: #ce4d4f;
+}
+	
 /* Content of years */
 div#years_content {	
 }

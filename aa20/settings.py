@@ -8,11 +8,16 @@
 ####################################################################################################
 
 # Debug flag
+# DEBUG = False
 DEBUG = True
 
 # Location where applicatotion is installed
-ROOT_PATH = "/home/george/dev/sarpaque/aa20"
-# ROOT_PATH = "/home/g-php/domains/alice.g-php.com/aa20"
+# SRC_ROOT_PATH = "/afs/cern.ch/user/g/glestari/www/alice20"
+# PUBLIC_ROOT_PATH = "/afs/cern.ch/user/g/glestari/www/alice20/public"
+# SRC_ROOT_PATH = "/home/g-php/domains/alice.g-php.com/aa20"
+# PUBLIC_ROOT_PATH = SRC_ROOT_PATH
+SRC_ROOT_PATH = "/home/george/dev/sarpaque/aa20"
+PUBLIC_ROOT_PATH = SRC_ROOT_PATH
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -23,6 +28,7 @@ ROOT_PATH = "/home/george/dev/sarpaque/aa20"
 # system time zone.
 TIME_ZONE = "Europe/Paris"
 
+# Content delivery network URL
 # CDN_HOST = "http://dmsopw99fk3j6.cloudfront.net"
 CDN_HOST = ""
 
@@ -40,7 +46,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': "django.db.backends.sqlite3",
-        'NAME': ROOT_PATH + "/db.sqlite3",
+        'NAME': SRC_ROOT_PATH + "/db.sqlite3",
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
@@ -67,10 +73,10 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ROOT_PATH + "/media/"
+MEDIA_ROOT = PUBLIC_ROOT_PATH + "/media/"
 
 # ckEditor uploads
-CKEDITOR_UPLOAD_PATH = ROOT_PATH + "/media/ckeditor_uploads"
+CKEDITOR_UPLOAD_PATH = PUBLIC_ROOT_PATH + "/media/ckeditor_uploads"
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -81,7 +87,7 @@ MEDIA_URL = CDN_HOST + "/media/"
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ROOT_PATH + "/static/"
+STATIC_ROOT = PUBLIC_ROOT_PATH + "/static/"
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -132,7 +138,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    ROOT_PATH + "/templates"
+    SRC_ROOT_PATH + "/templates"
 )
 
 INSTALLED_APPS = (

@@ -32,7 +32,7 @@
                         {% if box.readMoreLink and box.readMoreType == "link" %}
                             <a href="{{ box.readMoreLink }}" class="read-more" target="_blank">Read more</a>
                         {% elif box.readMoreHTML and box.readMoreType == "html" %}
-                            <a href="{% url "/BoxMore" boxId=box.id %}" class="show-modal read-more">Show info</a>
+                            <a href="{% url "/BoxMore" boxId=box.id %}" class="show-modal read-more">Read more</a>
                         {% endif %}                        
                     </div>
                 {% endif %}                                    
@@ -64,7 +64,7 @@
                         {% if box.readMoreLink and box.readMoreType == "link" %}
                             <a href="{{ box.readMoreLink }}" class="read-more" target="_blank">Read more</a>                                                
                         {% elif box.readMoreHTML and box.readMoreType == "html" %}
-                            <a href="{% url "/BoxMore" boxId=box.id %}" class="show-modal read-more">Show info</a>
+                            <a href="{% url "/BoxMore" boxId=box.id %}" class="show-modal read-more">Read more</a>
                         {% endif %}                                
                     </div>
                 {% endif %}                                    
