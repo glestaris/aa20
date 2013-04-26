@@ -298,28 +298,6 @@ div#years_content div.box.period-title h1 {
 	font-size: 150%;
 }
 
-/* Year labels periods */
-div#years_tape div.year-label.period-a,
-div#years_content div.box.year-label.period-a {
-	background-color: #f3152b;
-	color: #fff;
-}
-div#years_tape div.year-label.period-b,
-div#years_content div.box.year-label.period-b {
-	background-color: #273b45;
-	color: #fff;
-}
-div#years_tape div.year-label.period-c,
-div#years_content div.box.year-label.period-c {
-	background-color: #f97f39;
-	color: #fff;
-}
-div#years_tape div.year-label.period-d,
-div#years_content div.box.year-label.period-d {
-	background-color: #ce4d4f;
-	color: #fff;	
-}
-
 /* Final video */
 footer#video_container {
 	width: 960px;
