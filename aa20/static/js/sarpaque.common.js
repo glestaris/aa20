@@ -64,6 +64,15 @@ Sarpaque.Modal = {
 		jQuery( "div.close", this._el ).click( function() { Sarpaque.Modal.hide(); } );
 		jQuery( this._shadowEl ).click( function() { Sarpaque.Modal.hide(); } );
 		jQuery( window ).keyup( function( e ) { if( e.keyCode == 27 ) Sarpaque.Modal.hide(); } ); // esc key		
+		
+		/* Set data-width and data-height attribues */
+		var modalWidth = jQuery( this._el ).outerWidth();
+		jQuery( this._el ).data("width", modalWidth);
+		var modalHeight = jQuery( this._el ).outerHeight();
+		jQuery( this._el ).data("height", modalHeight);		
+		var modalContentHeight = jQuery( "div.content", this._el ).height();
+		jQuery( this._el ).data( "content-height", modalContentHeight );
+		jQuery( this._el ).data( "height-offset", modalHeight - modalContentHeight );
 	},
 	
 	/*** Sarpaque events ***/
@@ -71,10 +80,26 @@ Sarpaque.Modal = {
 	pageResized: function( windowHeight, windowWidth )
 	{
 		/* Set position of modal window */
-		var modalWidth = jQuery( this._el ).outerWidth();
-		var modalHeight = jQuery( this._el ).outerHeight();
-		jQuery( this._el ).css( "left", ( windowWidth - modalWidth ) / 2 );
-		jQuery( this._el ).css( "top", ( windowHeight - modalHeight ) / 2 );
+		var modalWidth = Number( jQuery( this._el ).data( "width" ) );
+		if( modalWidth > windowWidth ) {
+			jQuery( this._el ).width( windowWidth * 0.8 );
+			jQuery( this._el ).css( "left", ( windowWidth * 0.2 ) / 2 );
+		} else {
+			jQuery( this._el ).width( modalWidth );
+			jQuery( this._el ).css( "left", ( windowWidth - modalWidth ) / 2 );
+		}
+
+		var modalHeight = Number( jQuery( this._el ).data( "height" ) );
+		if( modalHeight > windowHeight ) {
+			jQuery( this._el ).height( windowHeight * 0.8 );
+			/* Fix content height */
+			jQuery( "div.content", this._el ).height( windowHeight * 0.8 - Number( jQuery( this._el ).data( "height-offset" ) ) );
+			jQuery( this._el ).css( "top", ( windowHeight * 0.2 ) / 2 );
+		} else {
+			jQuery( this._el ).height( modalHeight );
+			jQuery( "div.content", this._el ).height( Number( jQuery( this._el ).data( "content-height" ) ) );
+			jQuery( this._el ).css( "top", ( windowHeight - modalHeight ) / 2 );	
+		}
 
 		/* Set the dimensions of the global shadow */
 		jQuery( this._shadowEl ).width( windowWidth );
