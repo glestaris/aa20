@@ -56,7 +56,11 @@ var Sarpaque = {
 		var mainOuterHeight = jQuery( "#main" ).outerHeight();
 		jQuery( "div#line" ).height( mainOuterHeight - 2 );		
 		var lineWidth = jQuery( "div#line" ).outerWidth( true );
-		jQuery( "div#line" ).css( "left", ( windowWidth - lineWidth ) / 2 );
+		var ycWidth = jQuery("div#years_content").outerWidth( true );
+		if(windowWidth > ycWidth)
+			jQuery( "div#line" ).css( "left", ( windowWidth - lineWidth ) / 2 );
+		else
+			jQuery( "div#line" ).css( "left", ( ycWidth - lineWidth ) / 2 );
 
 		/* Sarpaque modules */
 		Sarpaque.Modal.pageResized( windowHeight, windowWidth );
