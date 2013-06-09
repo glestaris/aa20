@@ -3,7 +3,7 @@
 <div id="year_{{ year }}" style="{{ yb.year.additionalCSS }}" class="year">
     <div class="foregrounds-container">
         {% for foreground in yb.foregrounds %}
-            <div id="foreground_{{ foreground.id }}" class="foreground hidden" style="{% if foreground.positionLeft %}left:{{ foreground.positionLeft }}px;{% endif %}{% if foreground.positionRight %}right:{{ foreground.positionRight }};{% endif %}{% if foreground.width %}width: {{ foreground.width }}px;{% endif %}{{ foreground.additionalCSS }}" data-start-offset="{{ foreground.startOffset }}" data-end-offset="{{ foreground.endOffset }}"></div>
+            <div id="foreground_{{ foreground.id }}" class="foreground hidden" style="{% if foreground.positionLeft %}left:{{ foreground.positionLeft }}px;{% endif %}{% if foreground.positionRight %}right: {{ foreground.positionRight }}px;{% endif %}{% if foreground.width %}width: {{ foreground.width }}px;{% endif %}{{ foreground.additionalCSS }}" data-start-offset="{{ foreground.startOffset }}" data-end-offset="{{ foreground.endOffset }}"></div>
         {% endfor %}
     </div>
     <div class="inner">
