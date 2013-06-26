@@ -26,9 +26,10 @@
 	            <h2 class="no-js-alert">
 	                You should enable JavaScript to view this page!
 	            </h2>	
-				<div id="links_container">
+				<div id="links_container">										
+					<a href="http://aliceinfo.cern.ch/">The ALICE Experiment</a>
 					<a href="{% static "pages/collaboration.html" %}" class="show-modal">Collaboration</a>
-					<a href="{% static "pages/credits.html" %}" class="show-modal">Credits</a>
+					<a href="{% static "pages/credits.html" %}" class="show-modal">Timeline credits</a>
 				</div>
 				<div id="logo">
 				    <a href="http://alice.web.cern.ch/" target="_blank">
@@ -40,10 +41,10 @@
         <div id="main">      
             <div id="line"></div>
             <div id="years_content">                
-                {% for year, yb in years.iteritems %}
-                    {% include "year.html" %}
-                {% endfor %}                
-            </div>
+			    {% for year, yb in years.iteritems %}
+			        {% include "year.html" %}
+			    {% endfor %}                
+			</div>
             <div id="years_tape">
                 {% for year, yb in years.iteritems %}
                     <div class="year-container">
@@ -53,9 +54,12 @@
                     </div>
                 {% endfor %}                
             </div>
+			<footer id="video_label">
+				<h1>and the journey continues...</h1>
+			</footer>
             <footer id="video_container">
                 <video class="video-js vjs-default-skin" controls preload="auto">
-                    <source src="{{ MEDIA_URL }}/final_video.ogv" type="video/ogg">
+                    <source src="{{ MEDIA_URL }}final_video.ogv" type="video/ogg">
                 </video>
             </footer>
         </div>                
